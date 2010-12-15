@@ -11,6 +11,8 @@ class Hijack::Console
 end
 
 module Ripl::Hijack
+  VERSION = '0.1.0'
+
   def before_loop
     Hijack.start(config[:hijack_pid], config[:hijack_options])
     @binding = loop_eval("self").instance_eval { binding }

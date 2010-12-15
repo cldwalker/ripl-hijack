@@ -1,0 +1,31 @@
+== Description
+This ripl plugin gives you a ripl console to any ruby process using
+{hijack}[https://github.com/ileitch/hijack].
+
+== Install
+Install the gem with:
+
+    sudo gem install ripl-hijack
+
+== Usage
+
+Say on a server far away you have an evil process 666.
+
+Use just like hijack:
+
+    $ ripl hijack 666 
+    => Hijacked 666
+    >>
+
+Supports same options as hijack:
+
+    $ ripl hijack 666 --mute
+
+Can also take ripl options:
+
+    # Don't load irbrc and riplrc
+    $ ripl hijack 666 --mute -f -F
+
+== Limitations
+* Completion is partially working
+* _ isn't working
