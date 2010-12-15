@@ -2,8 +2,16 @@
 
 require 'ripl'
 require 'ripl/hijack'
+
+if ARGV[0].nil? || ARGV.delete('-h') || ARGV.delete('--help')
+  abort "ripl hijack [--gdb-debug] [--mute] [--execute=FILE] PID"
+end
+
 options = {}
 options[:gdb_debug] = true if ARGV.delete('--gdb-debug') 
 options[:mute] = true if ARGV.delete('--mute') 
-Hijack.start(ARGV.shift, options)
-Ripl.start
+if (opt = ARGV.find {|e| e[/^--execute/] }) && opt[/-execute=?(.*)/]
+  options[:execute] = $1.empty? ? argv.shift.to_s : $1
+end
+
+Ripl.start :hijack_pid => ARGV.shift, :hijack_options => options
