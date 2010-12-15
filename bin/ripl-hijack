@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'ripl'
+require 'ripl/hijack'
+options = {}
+options[:gdb_debug] = true if ARGV.delete('--gdb-debug') 
+options[:mute] = true if ARGV.delete('--mute') 
+Hijack.start(ARGV.shift, options)
+Ripl.start
